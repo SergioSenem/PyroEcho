@@ -21,6 +21,7 @@ class Server:
     def promote(self):
         self.name = "server"
         self.is_master = True
+        print("Promoted the master!")
 
     def replicate_message(self, message):
         if self.is_master:
@@ -71,11 +72,18 @@ def get_master_server(servers):
     return None
 
 
+def list_servers(nameserver):
+    print("Server list:")
+    servers = get_servers(nameserver)
+    for server in servers:
+        print(server)
+
+
 d = Pyro4.Daemon()
 ns = Pyro4.locateNS()
 s = start_server(d, ns)
 watcher_uri = ns.lookup('watcher')
 watcher = Pyro4.Proxy(watcher_uri)
 watcher.add_server_name(s.name)
-print(get_servers(ns))
+list_servers(ns)
 d.requestLoop()
