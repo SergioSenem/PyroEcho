@@ -3,10 +3,10 @@ PyroEcho
 
 Final project of UDESC School Subject: Distributed systems.
 
-# Dependency #
+# Dependencies #
 
-Python version 3 or above
-Pyro4
+* Python version 3 or above
+* Pyro4
 
 ## Running the project
 
