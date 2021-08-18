@@ -11,6 +11,7 @@ class Watcher:
     def add_server_name(self, name):
         server = self.servers[-1]
         server['name'] = name
+        self.list_servers()
 
     def server_connected(self, connection, data):
         try:
@@ -25,7 +26,6 @@ class Watcher:
         is_master = len(self.servers) == 0
         server = {'id': connection_id, 'is_master': is_master}
         self.servers.append(server)
-        print("Server list: ", self.servers)
 
     def server_disconnected(self, connection):
         try:
@@ -59,6 +59,11 @@ class Watcher:
                 print(f"Server {name} promoted to master.")
                 return
         print('There are no other servers connected.')
+
+    def list_servers(self):
+        print("Server list: ")
+        for server in self.servers:
+            print(server)
 
 
 daemon = Pyro4.Daemon()
